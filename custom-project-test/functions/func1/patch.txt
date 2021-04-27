@@ -1,0 +1,12 @@
+//Patch to #1 
+//Copy and paste the code below
+public ResultSet requestQuery(String acctNo) throws SQLException { 
+  String query = "SELECT * FROM myacts WHERE acntNo = " + acctNo;
+  if(isValidAccount(acctNo)){
+    return null;
+  }
+  PreparedStatement pstmt = connection.prepareStatement(query);
+  pstmt.setString( 1, request.getParameter("acnumber"));
+  ResultSet results = pstmt.executeQuery( );
+  return results;
+}

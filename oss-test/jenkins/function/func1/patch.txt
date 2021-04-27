@@ -1,0 +1,16 @@
+//Patch for #1
+//Copy and paste the code below
+public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
+    FilePath dir = preferredLocation(tool, node);
+    FilePath script = dir.createTextTempFile("hudson", getCommandFileExtension(), command);
+    try {
+        String[] cmd = getCommandCall(script);
+        int r = node.createLauncher(log).launch().cmds(cmd).stdout(log).pwd(dir).join();
+        if (r != 0) {
+            throw new IOException("Command returned status " + r);
+        }
+    } finally {
+        script.safeDelete();
+    }
+    return dir.child(getToolHome());
+}

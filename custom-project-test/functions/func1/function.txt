@@ -1,0 +1,10 @@
+//Vulnerable Function #1
+//language: Java
+//Copy and paste the code below
+public ResultSet requestQuery(String acctNo) throws SQLException { 
+  String query = "SELECT * FROM myacts WHERE acntNo = " + acctNo;
+  PreparedStatement pstmt = connection.prepareStatement(query);
+  pstmt.setString( 1, request.getParameter("acnumber"));
+  ResultSet results = pstmt.executeQuery( );
+  return results;
+}

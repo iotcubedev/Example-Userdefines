@@ -1,0 +1,18 @@
+//Patch to #2
+//Copy and paste the code below
+public void executeCommand(String input) throws IOException, Exception {
+  Runtime r = Runtime.getRuntime();
+  String command = "";
+  
+  //allow only safe characters
+  if (!Pattern.matches("[0-9A-Za-z@.]+", input)) {
+    throw new Exception();
+  }
+  
+  if(isWindows()){
+  	command = "cmd -c " + input;
+  } else {
+    command = "bash " + input;
+  }
+  r.exec("/bin/sh -c some_tool" + command);
+}

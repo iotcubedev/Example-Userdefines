@@ -1,0 +1,13 @@
+//Vulnerable Function #2
+//language: Java
+//Copy and paste the code below
+public void executeCommand(String input) throws IOException {
+  Runtime r = Runtime.getRuntime();
+  String command = "";
+  if(isWindows()){
+  	command = "cmd -c " + input;
+  } else {
+    command = "bash " + input;
+  }
+  r.exec("/bin/sh -c some_tool" + command);
+}

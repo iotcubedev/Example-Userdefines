@@ -1,13 +1,14 @@
 ### 기본설명
-Labrador OSS 에서 사용자 정의 요소 검출 테스트를 위한 예시 요소들입니다.
+사용자 정의 요소 검출 테스트를 위해 
+래브라도OSS 조직정책 페이지에 "등록할 사용자 정의 요소"들과 
+분석할 대상인 "프로젝트 정보"를 기술하는  리포지터리입니다.
 
-### 테스트 방법 
-1. 다음 내용을 확인하여 사용자정의 취약점 및 컴포넌트를 <strong>'조직관리 -> 사용자 정의 구성 관리'</strong>에 등록합니다.
 
-* 사용자정의 취약점: proprietaryVulnerableFunctions/exampleVulnFunc.java 의 주석 확인
-* 사용자정의 컴포넌트: proprietaryComponents/readme.txt 확인
+#### 폴더설명
+1. custom-project-test
+* 사내에서 생성한 예제 프로젝트로 테스트하는 폴더
+* 빠른 테스트를 원하는 경우. 검출 결과의 형태를 확인하고 싶은 경우.
 
-2. 아래 프로젝트들을 labrador.iotcube.com 에서 스캔하시면 사용자 정의 요소들을 검출합니다.
-
-* https://github.com/iotcubedev/Java-Project-with-Userdefines
-* https://github.com/iotcubedev/Java-Project-Using-ES
+2. custom-project-test
+* github oss 프로젝트로 테스트하는 폴더
+* 분석시간이 오래걸리더라도 실제 오픈소스로의 분석 결과를 확인하고 싶은 경우.
