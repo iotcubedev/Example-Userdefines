@@ -1,0 +1,35 @@
+INT DNS_Unpack_Domain_Name(CHAR *dst, CHAR *src, CHAR *buf_begin){
+ 	INT16			size;
+  	INT				i, retval = 0;
+ 	CHAR			*savesrc;
+  
+  	savesrc = src;
+  
+  	while (*src){
+  		size = *src;
+    
+    	while ((size & 0xC0) == 0xC0) {
+    		if (!retval) {
+        		retval = src - savesrc + 2;
+        	}
+      	
+      		src++;
+          	src = &buf_begin[(size & 0x3f) * 256 + *src];
+          	size = *src;
+          
+          	for (i = 0; i < (size & 0x3f); i++) {
+            	*dst++ = *src++;
+            }
+          
+          	*dst++ = '.';      
+    	}
+      	*(--dst) = 0;
+      	src++;
+      
+      	if (!retval) {
+        	retval = src - savesrc;
+        }
+      
+      	return (retval);
+  	}
+}
