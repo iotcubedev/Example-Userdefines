@@ -12,8 +12,7 @@
 
 
 #### B. 대상 프로젝트 분석하기  
-1. 대상 프로젝트.
-A를 완료한 후 아래 프로젝트를 분석하면 A에서 등록한 사용자정의요소들이 검출됩니다.
+1. 아래 프로젝트를 분석하면 A에서 등록한 사용자정의요소들이 검출됩니다.
 
 * https://github.com/iotcubedev/Java-Project-with-Userdefines
 * https://github.com/iotcubedev/Java-Project-Using-ES
