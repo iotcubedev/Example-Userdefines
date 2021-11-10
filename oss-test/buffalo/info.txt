@@ -1,0 +1,5 @@
+URL: https://github.com/kakao/buffalo 
+태그: v1.2.1 
+
+소요시간: 약 20초
+python / c++ 검사 가능
