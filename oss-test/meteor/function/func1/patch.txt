@@ -1,0 +1,46 @@
+function doAddPlatform(options) {
+  import { CordovaProject } from '../cordova/project.js';
+
+  Console.setVerbose(!!options.verbose);
+
+  const projectContext = createProjectContext(options.appDir);
+
+  const platformsToAdd = options.args;
+  const patch = true;
+  let installedPlatforms = projectContext.platformList.getPlatforms();
+
+  main.captureAndExit('', 'adding platforms', () => {
+    for (var platform of platformsToAdd) {
+      if (installedPlatforms.includes(platform)) {
+        buildmessage.error(`${platform}: platform is already added`);
+      } else if (!CORDOVA_PLATFORMS.includes(platform)) {
+        buildmessage.error(`${platform}: no such platform`);
+      }
+    }
+
+    if (buildmessage.jobHasMessages()) {
+      return;
+    }
+
+    const cordovaProject = new CordovaProject(projectContext);
+    if (buildmessage.jobHasMessages()) return;
+
+    installedPlatforms = installedPlatforms.concat(platformsToAdd);
+    const cordovaPlatforms = filterPlatforms(installedPlatforms);
+    cordovaProject.ensurePlatformsAreSynchronized(cordovaPlatforms);
+
+    if (buildmessage.jobHasMessages()) {
+      return;
+    }
+
+    // Only write the new platform list when we have succesfully synchronized
+    projectContext.platformList.write(installedPlatforms);
+
+    for (var platform of platformsToAdd) {
+      Console.info(`${platform}: added platform`);
+      if (cordovaPlatforms.includes(platform)) {
+        cordovaProject.checkPlatformRequirements(platform);
+      }
+    }
+  });
+}

@@ -1,0 +1,5 @@
+URL: https://github.com/meteor/meteor 
+태그: release/METEOR@2.5.1-beta.3 
+
+소요시간: 약 3분
+javascript 검출 가능 
