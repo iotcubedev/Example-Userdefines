@@ -1,0 +1,22 @@
+protected void NewCmdletActionHandler(object cimSession, CmdletActionEventArgs actionArgs)
+        {
+            DebugHelper.WriteLogEx("Disposed {0}, action type = {1}", 0, this.Disposed, actionArgs.Action);
+
+            if (this.Disposed)
+            {
+                if (actionArgs.Action is CimSyncAction)
+                {
+                    // unblock the thread waiting for response
+                    (actionArgs.Action as CimSyncAction).OnComplete();
+                }
+
+                return;
+            }
+
+            bool isEmpty = this.actionQueue.IsEmpty;
+            this.actionQueue.Enqueue(actionArgs.Action);
+            if (!isEmpty)
+            {
+                this.moreActionEvent.Set();
+            }
+        }
